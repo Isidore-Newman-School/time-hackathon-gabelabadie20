@@ -1,13 +1,20 @@
 float angle = 0;
 PImage sunTexture;
 PShape sun;
-float cameraZoom;
+PImage earthTexture;
+PShape earth;
+float cameraZoom = 500;
 float scrollSensitivity = 5;
+
+
 
 void setup() {
   sunTexture = loadImage("8k_sun.jpg");
-  sun = createShape(SPHERE, 300);
+  earthTexture = loadImage("8k_earth_daymap.jpg");
+  sun = createShape(SPHERE, 109 * 2);
   sun.setTexture(sunTexture);
+  earth = createShape(SPHERE, 50);
+  earth.setTexture(earthTexture);
   size(1920, 1080, P3D);
 }
 
@@ -43,11 +50,17 @@ void updateClock() {
 }
 
 void updateSphere() {
+  pushMatrix();
   translate(width / 2, height / 2, 0);
   angle += 0.1;
   rotateY(radians(angle));
   noStroke();
-  //ambient(255, 140, 0);
-  //emissive(253, 184, 19);
   shape(sun);
+  popMatrix();
+  
+  pushMatrix();
+  translate(width / 2 + 500, height / 2, 0);
+  rotateY(radians(map(second() + (minute() * 60.0) + (hour() * 60.0 * 60.0), 0, 86400, 0, 360)));
+  shape(earth);
+  popMatrix();
 }
