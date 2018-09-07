@@ -4,13 +4,13 @@ TimeFrame[] timeFrames = {
   //1:00 AM
   new TimeFrame(1 * 60 * 60, 0),
   //2:00 AM
-  new TimeFrame(1 * 60 * 60, 15),
+  new TimeFrame(2 * 60 * 60, 15),
   //3:00 AM
-  new TimeFrame(1 * 60 * 60, 25),
+  new TimeFrame(3 * 60 * 60, 25),
   //4:00 AM
-  new TimeFrame(1 * 60 * 60, 35),
+  new TimeFrame(4 * 60 * 60, 35),
   //5:00 AM
-  new TimeFrame(1 * 60 * 60, 41),
+  new TimeFrame(5 * 60 * 60, 41),
   //6:00 AM
   new TimeFrame(6 * 60 * 60, 231),
   //7:00 AM
@@ -73,7 +73,6 @@ void draw() {
   //background(currentHue, 67, 66);
   background(currentColor);
   currentTime = second() + (minute() * 60) + (hour() * 60 * 60);
-  println(hue(currentColor));
   updateBackground();
   stroke(0, 0, 100);
   strokeWeight(10);
@@ -94,8 +93,6 @@ void updateBackground() {
       break;
     }
   }
-  println(targetIndex);
-  println(hue(timeFrames[targetIndex].hue));
   //currentHue = int(lerp(float(currentHue), float(timeFrames[targetIndex].hue), map(currentTime, timeFrames[(targetIndex == 0) ? timeFrames.length - 1 : targetIndex - 1].time, timeFrames[targetIndex].time, 0.0, 1.0)));
   currentColor = lerpColor(currentColor, color(timeFrames[targetIndex].hue, 51.32, 88.78), map(currentTime, timeFrames[(targetIndex == 0) ? timeFrames.length - 1 : targetIndex - 1].time, timeFrames[targetIndex].time, 0.0, 1.0));
   //map(second() + (minute() * 60.0) + (hour() * 60.0 * 60.0), 0, 86400, 0, 360);
